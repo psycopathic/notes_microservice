@@ -57,3 +57,8 @@ docker-compose.override.yml
 # Miscellaneous
 *.swp
 *.swo
+
+#agents
+services/auth-service/.claude
+services/auth-service/.windsurf
+services/auth-service/.agents
