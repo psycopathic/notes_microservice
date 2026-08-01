@@ -1,4 +1,4 @@
-import { ApiResponse } from "../types/index.js";
+import { ApiResponse, ServiceError } from "../types/index.js";
 
 export const createApiResponse = <T>(
   success: boolean,
@@ -7,23 +7,20 @@ export const createApiResponse = <T>(
   error?: string,
   errors?: Record<string, string[]>
 ): ApiResponse<T> => {
-  const response: ApiResponse<T> = { success };
-
-  if (data !== undefined) {
-    response.data = data;
-  }
-
-  if (message !== undefined) {
-    response.message = message;
-  }
-
-  if (error !== undefined) {
-    response.error = error;
-  }
-
-  if (errors !== undefined) {
-    response.errors = errors;
-  }
-
-  return response;
+  return {
+    success,
+    data,
+    message,
+    error,
+    errors,
+  };
 };
+
+
+export const createErrorResponse = (error: string): ApiResponse => {
+  return createApiResponse(false, undefined, undefined, error);
+}
+
+export const createServiceError = (message: string, statusCode: number = 500, code?: string, details?: any): ServiceError => {
+  return new ServiceError(message, statusCode, code, details);
+}

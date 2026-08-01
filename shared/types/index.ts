@@ -70,9 +70,9 @@ export interface ServiceResponse<T = any> {
 export interface ApiResponse<T = any> {
   success: boolean;
   data?: T | undefined;
-  message?: string;
-  error?: string;
-  errors?: Record<string, string[]>;
+  message?: string | undefined;
+  error?: string | undefined;
+  errors?: Record<string, string[]> | undefined;
 }
 
 export interface AuthTokens {
