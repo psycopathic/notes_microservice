@@ -24,3 +24,7 @@ export const createErrorResponse = (error: string): ApiResponse => {
 export const createServiceError = (message: string, statusCode: number = 500, code?: string, details?: any): ServiceError => {
   return new ServiceError(message, statusCode, code, details);
 }
+
+export const createSuccessResponse = <T>(data: T, message?: string): ApiResponse<T> => {
+  return createApiResponse(true, data, message);
+}
