@@ -1,8 +1,12 @@
+import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 
 
 //create a singleton instance of the PrismaClient to be used throughout the application
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({
+    adapter,
     log: process.env.NODE_ENV === "development" ? ["query", "info", "warn", "error"] : ["error"], 
 });
 
